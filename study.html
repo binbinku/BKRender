@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4f0">
+  <title>传统渲染与实时光追 · 光线实验室</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="light-study" class="detail-page">
+  <header class="detail-header">
+    <a class="button back-button" href="index.html">返回场景列表</a>
+    <h1 class="scene-title"></h1>
+    <label class="scene-choice"><span>切换场景</span><select class="scene-select" aria-label="切换场景"></select></label>
+  </header>
+  <section class="viewport" aria-label="交互式场景查看器">
+    <div class="screen" id="scene-screen">
+      <canvas tabindex="0" aria-label="交互式光照场景"></canvas>
+      <img class="still" hidden alt="当前设置在固定视角下的渲染">
+      <p class="render-message" role="status">正在准备场景…</p>
+      <button class="button expand" type="button" aria-controls="scene-screen" aria-pressed="false">全屏查看</button>
+    </div>
+    <div class="viewer-toolbar">
+      <div class="effect-controls">
+        <fieldset class="mode-picker"><legend>渲染方式</legend>
+          <label><input type="radio" name="pipeline" value="baked"><span>传统渲染</span></label>
+          <label><input type="radio" name="pipeline" value="ray" checked><span>实时光追</span></label>
+        </fieldset>
+        <label class="stage-toggle"><input type="checkbox" class="moved"><span class="move-label"></span></label>
+        <label class="stage-toggle"><input class="gi" type="checkbox" role="switch" checked>全局光照</label>
+        <label class="stage-toggle motion-control" hidden><input class="motion" type="checkbox" role="switch">场景动画</label>
+        <label class="stage-toggle"><input class="reflections" type="checkbox" role="switch" checked>反射</label>
+      </div>
+      <div class="view-actions">
+        <div class="resolution-control" hidden>
+          <div class="resolution-info">
+            <label for="render-resolution">分辨率</label>
+            <span id="render-size"></span>
+          </div>
+          <select id="render-resolution" aria-describedby="render-size">
+            <option value="720">720p</option>
+            <option value="1080" selected>1080p</option>
+            <option value="1440">1440p</option>
+            <option value="2160">2160p</option>
+          </select>
+        </div>
+        <button class="button atmosphere-button" type="button" aria-expanded="false" aria-controls="atmosphere-settings">大气效果</button>
+        <div class="zoom-group" role="group" aria-label="场景缩放">
+          <button class="button zoom-out" type="button" aria-label="缩小场景" disabled>−</button>
+          <output class="zoom-level" aria-label="缩放比例">100%</output>
+          <button class="button zoom-in" type="button" aria-label="放大场景">＋</button>
+        </div>
+      </div>
+    </div>
+    <div id="atmosphere-settings" role="group" aria-label="大气效果" hidden>
+      <label class="stage-toggle"><input type="checkbox" role="switch" name="physicalSky" checked>物理天空</label>
+      <label class="stage-toggle"><input type="checkbox" role="switch" name="volumeClouds" checked>体积云</label>
+      <label class="stage-toggle"><input type="checkbox" role="switch" name="volumeFog" checked>体积雾</label>
+      <label class="stage-toggle"><input type="checkbox" role="switch" name="volumeLight" checked>体积光</label>
+    </div>
+  </section>
+  <section class="scene-notes" aria-label="场景观察提示">
+    <div class="caption"><span class="view-hint">拖动或用方向键转动视角</span><span class="sampling" aria-hidden="true"></span></div>
+    <p class="method-hint" aria-live="polite"></p>
+    <p><strong>全局光照</strong> <span class="gi-guide"></span></p>
+    <p><strong>反射</strong> <span class="reflection-guide"></span></p>
+  </section>
+</main>
+<script src="catalog.js"></script>
+<script src="worlds.js"></script>
+<script src="outdoors.js"></script>
+<script src="detail-trace.js"></script>
+<script src="bookshop.js"></script>
+<script src="canal.js"></script>
+<script src="vendor/three-renderer.min.js"></script>
+<script src="lightmap.js"></script>
+<script src="probes.js"></script>
+<script src="atmosphere.js"></script>
+<script src="lighting-history.js"></script>
+<script src="shader.js"></script>
+<script src="scene.js"></script>
+</body>
+</html>
